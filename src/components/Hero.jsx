@@ -3,10 +3,11 @@ import InteractiveParticles from './InteractiveParticles';
 import { Terminal, Cpu, Cloud, ChevronDown, Download } from 'lucide-react';
 
 const roles = [
-  "Intelligent Applications",
-  "AI & Machine Learning",
-  "Cloud Computing",
-  "Full Stack Development"
+  "DevOps Pipelines",
+  "Cloud Infrastructure",
+  "Networking Systems",
+  "Linux Automation",
+  "Scalable Infrastructure"
 ];
 
 const typingSpeed = 100;
@@ -144,7 +145,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
             <Cpu size={14} style={{ color: 'var(--color-ai-magenta)' }} />
             <span style={heroStyles.badgeDivider}>|</span>
             <Cloud size={14} style={{ color: 'var(--color-cloud-cyan)' }} />
-            <span style={heroStyles.badgeText}>CSE STUDENT | AI & CLOUD ENTHUSIAST</span>
+            <span style={heroStyles.badgeText}>CSE STUDENT | DEVOPS & NETWORKING ENTHUSIAST</span>
           </div>
 
           {/* Hero Headline */}
@@ -154,7 +155,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
 
           {/* Subtitle with Typing Animation */}
           <h2 style={heroStyles.typingHeadline}>
-            I build{' '}
+            Building Modern{' '}
             <span style={heroStyles.animatedText}>
               {typedText}
               <span style={heroStyles.cursor}>|</span>
@@ -163,19 +164,19 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
 
           {/* Bio paragraph */}
           <p style={heroStyles.description}>
-            I am a Computer Science and Engineering student with a strong interest in Artificial Intelligence, Machine Learning, Cloud Computing, and Full Stack Development. I enjoy building intelligent applications, developing practical software solutions, and exploring emerging technologies that solve real-world problems.
+            I am a Computer Science Engineering student passionate about DevOps, Cloud Computing, Networking, Linux, and Automation. My goal is to build scalable infrastructure, automate deployments, and create reliable systems while continuously learning through real-world projects.
             <br /><br />
-            My experience includes AI-powered applications, full-stack web development, cloud-based systems, and self-hosted infrastructure projects. I am continuously improving my technical skills through hands-on development, project-based learning, and experimentation with modern technologies.
+            I strongly believe in learning by building real-world projects instead of simply completing tutorials. Every project I build deepens my understanding of modern infrastructure and software engineering.
           </p>
 
           {/* Quick CTA Tech Stack Badges */}
           <div className="hero-tech-icons" style={heroStyles.techIcons}>
-            <span className="badge badge-ai" style={heroStyles.techBadge}>PyTorch</span>
-            <span className="badge badge-cloud" style={heroStyles.techBadge}>AWS Cloud</span>
-            <span className="badge badge-ai" style={heroStyles.techBadge}>TensorFlow</span>
-            <span className="badge badge-cloud" style={heroStyles.techBadge}>Terraform</span>
-            <span className="badge badge-ai" style={heroStyles.techBadge}>MLflow</span>
-            <span className="badge badge-cloud" style={heroStyles.techBadge}>Kubernetes</span>
+            <span className="badge badge-cloud" style={heroStyles.techBadge}>Linux</span>
+            <span className="badge badge-ai" style={heroStyles.techBadge}>Python</span>
+            <span className="badge badge-cloud" style={heroStyles.techBadge}>Docker</span>
+            <span className="badge badge-ai" style={heroStyles.techBadge}>Networking</span>
+            <span className="badge badge-cloud" style={heroStyles.techBadge}>Git & GitHub</span>
+            <span className="badge badge-ai" style={heroStyles.techBadge}>React</span>
           </div>
 
           {/* CTA Buttons */}
@@ -189,7 +190,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
               }}
             >
               <Cpu size={18} />
-              Explore Systems
+              View Projects
             </button>
             <button 
               className="btn btn-secondary" 
@@ -200,7 +201,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
               }}
             >
               <Terminal size={18} />
-              Initialize Contact
+              Connect
             </button>
             <button 
               className="btn btn-secondary" 
@@ -278,7 +279,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
 
               {/* Center label */}
               <text x="140" y="134" textAnchor="middle" fill="rgba(255,255,255,0.92)" fontSize="13" fontFamily="Fira Code, monospace" fontWeight="600" letterSpacing="2">MADESH S</text>
-              <text x="140" y="153" textAnchor="middle" fill="rgba(255,255,255,0.32)" fontSize="8" fontFamily="Fira Code, monospace" letterSpacing="5">AI · CLOUD</text>
+              <text x="140" y="153" textAnchor="middle" fill="rgba(255,255,255,0.32)" fontSize="8" fontFamily="Fira Code, monospace" letterSpacing="4">DEVOPS · CLOUD</text>
 
               {/* Orbiting dot — outer ring, clockwise */}
               <circle cx="140" cy="8" r="5" fill="rgba(255,255,255,0.78)" filter="url(#hero-dot-glow)">
@@ -294,16 +295,16 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
               </circle>
             </svg>
 
-            {/* Metric Cards */}
+            {/* Info Cards */}
             <div style={heroStyles.metricRow}>
               {[
-                { label: 'DEPLOYED', value: '24+',   sub: 'AI Models'   },
-                { label: 'REGIONS',  value: '12+',   sub: 'Cloud Zones'  },
-                { label: 'UPTIME',   value: '99.9%', sub: 'SLA Target'   },
+                { label: 'PURSUING', value: 'B.E.',  sub: 'CSE 2023–2027' },
+                { label: 'CGPA',     value: '7.5',   sub: 'Current Score'  },
+                { label: 'GOAL',     value: 'DevOps', sub: 'Career Focus'  },
               ].map(m => (
                 <div key={m.label} className="glass-panel" style={heroStyles.metricCard}>
                   <span style={heroStyles.metricLabel}>{m.label}</span>
-                  <span style={heroStyles.metricValue}>{m.value}</span>
+                  <span style={{...heroStyles.metricValue, fontSize: m.value.length > 5 ? '1rem' : '1.35rem'}}>{m.value}</span>
                   <span style={heroStyles.metricSub}>{m.sub}</span>
                 </div>
               ))}

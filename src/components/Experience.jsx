@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, GraduationCap } from 'lucide-react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function Experience() {
@@ -17,18 +17,13 @@ export default function Experience() {
           if (section) {
             const rect = section.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-
-            // Progress starts when top of section enters viewport (rect.top === windowHeight)
-            // Progress finishes when bottom of section is 200px from the bottom of the viewport
             const start = windowHeight;
             const end = 200;
             const totalHeight = rect.height;
             const totalScrollableDistance = totalHeight + start - end;
-            
             const scrolled = start - rect.top;
             let progress = scrolled / totalScrollableDistance;
             progress = Math.min(Math.max(progress, 0), 1);
-            
             setScrollProgress(progress);
           }
           ticking = false;
@@ -36,7 +31,6 @@ export default function Experience() {
         ticking = true;
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -45,38 +39,52 @@ export default function Experience() {
   const timelineData = [
     {
       id: 1,
-      role: 'AI/ML & Cloud Explorer',
-      company: 'Personal Projects & Dev Labs',
-      duration: '2024 - PRESENT',
+      role: 'DevOps Intern',
+      company: 'ICANIO Technologies',
+      duration: 'Internship',
       color: 'var(--color-ai-magenta)',
+      icon: 'work',
       bullets: [
-        'Built and deployed containerized AI-powered applications, automating pipelines and model training runs.',
-        'Orchestrated self-hosted developer infrastructure, reverse proxies, and secure networking configurations.',
-        'Explored serverless ingestion functions and vectorized database index configurations for intelligent search.'
+        'Worked as a DevOps Intern and gained exposure to Linux, Git, DevOps workflows, cloud concepts, and infrastructure-related practices.',
+        'Improved practical engineering knowledge by working with real-world tools and development environments.',
+        'Strengthened foundational understanding of CI/CD pipelines, version control systems, and containerization concepts.'
       ]
     },
     {
       id: 2,
-      role: 'Full-Stack Developer',
-      company: 'Academic Projects & Hackathons',
-      duration: '2023 - 2024',
-      color: 'var(--color-cyber-purple)',
+      role: 'Bachelor of Engineering — Computer Science & Engineering',
+      company: 'SCAD College of Engineering and Technology, Tamil Nadu',
+      duration: '2023 – 2027',
+      color: 'var(--color-cloud-cyan)',
+      icon: 'education',
       bullets: [
-        'Designed and developed full-stack web applications with React, Node.js, and multi-tier database systems.',
-        'Wrote integration test cases and automated code validation pipelines to ensure application security and robustness.',
-        'Collaborated on building software prototypes under tight timelines, solving real-world challenges.'
+        'Currently pursuing B.E. in Computer Science and Engineering with a CGPA of 7.5.',
+        'Building hands-on skills in DevOps, Networking, Cloud Computing, Linux, and Software Development through self-driven projects.',
+        'Actively applying classroom knowledge to real engineering challenges and open-source exploration.'
       ]
     },
     {
       id: 3,
-      role: 'Computer Science Student',
-      company: 'Engineering Studies (CSE)',
-      duration: '2022 - PRESENT',
-      color: 'var(--color-cloud-cyan)',
+      role: 'Higher Secondary Education',
+      company: 'Hope Matric Higher Secondary School, Tamil Nadu',
+      duration: '11th & 12th Grade',
+      color: 'var(--color-cyber-purple)',
+      icon: 'education',
       bullets: [
-        'Mastered foundational computer science concepts, distributed systems, database management, and data structures.',
-        'Built and programmed command-line utility tools, scripts, and algorithmic solvers for practical coursework.',
-        'Continuously improved coding practices through hands-on labs, open-source explorations, and peer learning.'
+        'Completed 11th and 12th grade at Hope Matric Higher Secondary School in Tamil Nadu.',
+        'Developed early interest in technology, computers, and engineering during high school years.'
+      ]
+    },
+    {
+      id: 4,
+      role: 'Secondary Education',
+      company: 'St. Thomas Convent High School, Mumbai',
+      duration: 'Secondary School',
+      color: 'var(--color-cloud-cyan)',
+      icon: 'education',
+      bullets: [
+        'Completed secondary education at St. Thomas Convent High School, Mumbai.',
+        'Primary education at St. Antony School, Mumbai.'
       ]
     }
   ];
@@ -86,10 +94,10 @@ export default function Experience() {
       <div className="container">
         
         <div ref={headerRef} className={`section-header reveal-down ${headerVisible ? 'visible' : ''}`}>
-          <span className="badge badge-cloud" style={{ marginBottom: '10px' }}>DEVELOPMENT PATHWAYS</span>
-          <h2 className="section-title">Development Journey</h2>
+          <span className="badge badge-cloud" style={{ marginBottom: '10px' }}>EDUCATION & EXPERIENCE</span>
+          <h2 className="section-title">Journey & Background</h2>
           <p style={styles.sectionSubtitle} className="section-subtitle">
-            A chronological timeline tracking my computer science education, personal projects, and hands-on developer experiences.
+            A chronological timeline of my education, internship experience, and ongoing journey in computer science and engineering.
           </p>
         </div>
 
@@ -150,7 +158,10 @@ export default function Experience() {
                     boxShadow: `0 0 12px ${item.color}`
                   }}
                 >
-                  <Briefcase size={12} style={{ color: 'var(--text-bright)' }} />
+                  {item.icon === 'work' 
+                    ? <Briefcase size={12} style={{ color: 'var(--text-bright)' }} />
+                    : <GraduationCap size={12} style={{ color: 'var(--text-bright)' }} />
+                  }
                 </div>
               </div>
 
@@ -167,6 +178,10 @@ export default function Experience() {
 }
 
 const styles = {
+  sectionSubtitle: {
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
   timeline: {
     position: 'relative',
     maxWidth: '1000px',
@@ -214,14 +229,16 @@ const styles = {
     gap: '2px',
   },
   roleTitle: {
-    fontSize: '1.2rem',
+    fontSize: '1.1rem',
     fontFamily: 'var(--font-display)',
     fontWeight: '700',
+    lineHeight: 1.25,
   },
   companyName: {
-    fontSize: '0.85rem',
+    fontSize: '0.82rem',
     color: 'var(--text-muted)',
     fontFamily: 'var(--font-body)',
+    marginTop: '2px',
   },
   dateBadge: {
     display: 'inline-flex',
@@ -230,6 +247,7 @@ const styles = {
     padding: '4px 12px',
     borderRadius: '20px',
     border: '1px solid transparent',
+    flexShrink: 0,
   },
   dateText: {
     fontSize: '0.72rem',

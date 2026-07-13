@@ -5,7 +5,7 @@ import useScrollReveal from '../hooks/useScrollReveal';
 export default function Skills() {
   const [headerRef, headerVisible] = useScrollReveal();
   const [contentRef, contentVisible] = useScrollReveal();
-  const [activeCategory, setActiveCategory] = useState('ai');
+  const [activeCategory, setActiveCategory] = useState('programming');
   const [animateWidths, setAnimateWidths] = useState(false);
 
   const handleCategoryChange = (key) => {
@@ -19,80 +19,85 @@ export default function Skills() {
   }, [activeCategory]);
 
   const skillData = {
-    ai: {
-      title: 'Artificial Intelligence & Machine Learning',
+    programming: {
+      title: 'Programming & Web Development',
       icon: <Cpu size={20} />,
       color: 'var(--color-ai-magenta)',
-      desc: 'Expertise in training, optimizing, and deploying deep neural networks, custom transformers, and LLM-powered RAG systems.',
+      desc: 'Building full-stack applications with modern web technologies and general-purpose programming languages for backend automation and scripting.',
       skills: [
-        { name: 'PyTorch / TensorFlow', level: 92 },
-        { name: 'SageMaker / ML Pipelines', level: 88 },
-        { name: 'LLMs (GPT, Gemini, Llama) & RAG', level: 85 },
-        { name: 'NLP & Computer Vision', level: 80 },
-        { name: 'Scikit-Learn / Classical ML', level: 90 }
+        { name: 'Python', level: 72 },
+        { name: 'JavaScript', level: 70 },
+        { name: 'HTML & CSS', level: 80 },
+        { name: 'Java', level: 60 },
+        { name: 'React', level: 65 },
+        { name: 'Node.js', level: 58 },
       ],
       methodologies: [
-        'Distributed Training (DataParallel)',
-        'Model Quantization & Pruning',
-        'Parameter-Efficient Fine-Tuning (LoRA)',
-        'Semantic Embeddings & Indexing'
+        'Component-based UI with React',
+        'REST API development with Node.js',
+        'Python scripting for automation',
+        'Firebase backend integration',
+        'Git-based version control workflows'
       ]
     },
-    cloud: {
-      title: 'Cloud Infrastructure & Architecture',
+    networking: {
+      title: 'Networking & Linux',
       icon: <Cloud size={20} />,
       color: 'var(--color-cloud-cyan)',
-      desc: 'Orchestrating highly secure, auto-scaling, and redundant multi-region architectures with comprehensive Infrastructure as Code.',
+      desc: 'Understanding core networking fundamentals including TCP/IP stack, DNS resolution, IP addressing, routing, and packet communication principles.',
       skills: [
-        { name: 'AWS (VPC, IAM, ECS, Lambda, S3)', level: 94 },
-        { name: 'Terraform (IaC)', level: 90 },
-        { name: 'Docker Containers', level: 95 },
-        { name: 'Kubernetes (EKS)', level: 82 },
-        { name: 'Google Cloud Platform (GCP)', level: 75 }
+        { name: 'TCP/IP & OSI Model', level: 68 },
+        { name: 'DNS & HTTP/HTTPS', level: 65 },
+        { name: 'IP Addressing & NAT/PAT', level: 62 },
+        { name: 'Ubuntu Linux (CLI)', level: 60 },
+        { name: 'Routers & Port Forwarding', level: 58 },
       ],
       methodologies: [
-        'Multi-AZ Redundancy Configurations',
-        'Serverless Orchestration Layers',
-        'Identity & Access Management Policy Specs',
-        'Dynamic Infrastructure States (Terraform Cloud)'
+        'IP Addressing & Subnetting Concepts',
+        'Port Forwarding & NAT Configuration',
+        'Packet flow & retransmission (ACK/Timeout)',
+        'DNS resolution & domain configuration',
+        'Linux command-line server management'
       ]
     },
     data: {
-      title: 'Data Systems & Vector Databases',
+      title: 'Databases & Version Control',
       icon: <Database size={20} />,
       color: 'var(--color-cyber-purple)',
-      desc: 'Designing low-latency vector indexing clusters and high-volume event streaming architectures for large-scale data ingestion.',
+      desc: 'Working with relational and NoSQL databases for application backends, and managing code collaboration workflows using Git and GitHub.',
       skills: [
-        { name: 'Pinecone Vector DB', level: 88 },
-        { name: 'PostgreSQL / pgvector', level: 85 },
-        { name: 'Redis Cache', level: 90 },
-        { name: 'Apache Spark', level: 80 },
-        { name: 'Apache Kafka / Stream Ingestion', level: 78 }
+        { name: 'MySQL', level: 60 },
+        { name: 'Firebase', level: 65 },
+        { name: 'Git', level: 72 },
+        { name: 'GitHub', level: 72 },
+        { name: 'MongoDB (Learning)', level: 35 },
       ],
       methodologies: [
-        'Cosine Similarity Metric Index Optimizations',
-        'High-Throughput Partition Configurations',
-        'Multi-Tier Database Caching Scales',
-        'Dynamic ETL Partition Pipelines'
+        'Relational database design with MySQL',
+        'Firebase real-time backend integration',
+        'Git branching & collaborative workflows',
+        'GitHub repository and project management',
+        'MongoDB document model (currently learning)'
       ]
     },
     devops: {
-      title: 'DevOps & MLOps Operations',
+      title: 'DevOps & Cloud (Learning)',
       icon: <ShieldAlert size={20} />,
       color: 'var(--color-cloud-cyan)',
-      desc: 'Structuring automated integration, deployment pipelines, telemetry dashboards, and ML tracking servers for rapid model lifecycles.',
+      desc: 'Actively learning and building foundational skills in DevOps, cloud infrastructure, and container-based deployment workflows through hands-on projects.',
       skills: [
-        { name: 'GitHub Actions (CI/CD)', level: 92 },
-        { name: 'MLflow / Telemetry Tracking', level: 85 },
-        { name: 'FastAPI / Python Microservices', level: 90 },
-        { name: 'Prometheus & Grafana Alert Systems', level: 80 },
-        { name: 'Data Drift & Validation Testing', level: 82 }
+        { name: 'Docker (Learning)', level: 42 },
+        { name: 'AWS (Learning)', level: 38 },
+        { name: 'Kubernetes (Learning)', level: 28 },
+        { name: 'GitHub Actions (Learning)', level: 40 },
+        { name: 'Azure (Learning)', level: 25 },
       ],
       methodologies: [
-        'Containerized Automated Deployment Runs',
-        'Continuous Model Monitoring Scripts',
-        'Telemetry Logging Standards (S3/CloudWatch)',
-        'Blue-Green Model Routing Sequences'
+        'Container-based deployments with Docker',
+        'CI/CD pipeline setup with GitHub Actions',
+        'AWS fundamentals (EC2, S3, IAM basics)',
+        'Kubernetes orchestration concepts',
+        'Infrastructure as Code (Terraform — exploring)'
       ]
     }
   };
@@ -103,9 +108,9 @@ export default function Skills() {
         
         <div ref={headerRef} className={`section-header reveal-down ${headerVisible ? 'visible' : ''}`}>
           <span className="badge badge-ai" style={{ marginBottom: '10px' }}>TECHNICAL INVENTORY</span>
-          <h2 className="section-title">Professional Skill Matrix</h2>
+          <h2 className="section-title">Skills & Learning Progress</h2>
           <p className="section-subtitle">
-            A comprehensive mapping of my engineering competencies, categorized across core AI, cloud architecture, and operations.
+            An honest breakdown of my current skills, tools I am actively learning, and the technologies I am building towards.
           </p>
         </div>
 
@@ -132,7 +137,7 @@ export default function Skills() {
                 </div>
                 <div style={styles.navTextContainer}>
                   <span style={styles.navTitle}>{skillData[key].title.split(' & ')[0]}</span>
-                  <span style={styles.navSub}>{skillData[key].skills.length} core systems analyzed</span>
+                  <span style={styles.navSub}>{skillData[key].skills.length} skills tracked</span>
                 </div>
               </button>
             ))}
@@ -152,7 +157,7 @@ export default function Skills() {
             {/* SKILLS METERS GRID */}
             <div style={styles.skillsGrid} className="skills-grid">
               <div style={styles.metersCol}>
-                <h4 style={styles.colHeading}>COMPETENCY PROGRESS TELEMETRY</h4>
+              <h4 style={styles.colHeading}>SKILLS & LEARNING PROGRESS</h4>
                 {skillData[activeCategory].skills.map(s => (
                   <div key={s.name} style={styles.meterContainer}>
                     <div style={styles.meterLabels}>
@@ -175,7 +180,7 @@ export default function Skills() {
 
               {/* METHODOLOGIES COLUMN */}
               <div style={styles.methodsCol}>
-                <h4 style={styles.colHeading}>PRODUCTION ARCHITECTURAL METHODOLOGIES</h4>
+              <h4 style={styles.colHeading}>FOCUS AREAS & PRACTICES</h4>
                 <div style={styles.methodsList}>
                   {skillData[activeCategory].methodologies.map(m => (
                     <div key={m} style={styles.methodItem}>

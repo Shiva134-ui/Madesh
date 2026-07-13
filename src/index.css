@@ -1206,7 +1206,7 @@ html, body {
 
   /* Hero */
   .hero-robot-container {
-    display: none !important;
+    display: flex !important;
   }
   .hero-section h1 {
     font-size: 2.4rem !important;

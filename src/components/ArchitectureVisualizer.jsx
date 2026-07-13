@@ -89,10 +89,10 @@ export default function ArchitectureVisualizer() {
       <div className="container">
         
         <div ref={headerRef} className={`section-header reveal-down ${headerVisible ? 'visible' : ''}`}>
-          <span className="badge badge-cloud" style={{ marginBottom: '10px' }}>SYSTEM INFRASTRUCTURE</span>
-          <h2 className="section-title">Interactive MLOps & Cloud Architecture</h2>
+          <span className="badge badge-cloud" style={{ marginBottom: '10px' }}>DEVOPS ARCHITECTURE</span>
+          <h2 className="section-title">Interactive DevOps & Cloud Pipeline</h2>
           <p className="section-subtitle">
-            Recruiters: Click on any architectural node to see detailed telemetry, technology stacks, and how data moves through my systems.
+            An interactive visualization of a modern DevOps and cloud architecture pipeline. Click on any node to explore the technology stack, role, and data flow at each layer.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export default function ArchitectureVisualizer() {
                 <span style={{...styles.windowDot, backgroundColor: '#ffbd2e'}} />
                 <span style={{...styles.windowDot, backgroundColor: '#27c93f'}} />
               </div>
-              <span style={styles.canvasTitle} className="architecture-canvas-title">mlops_pipeline_v3.2.svg</span>
+              <span style={styles.canvasTitle} className="architecture-canvas-title">devops_pipeline_architecture.svg</span>
               <button 
                 onClick={simulateDataFlow} 
                 disabled={isSimulating}
@@ -113,7 +113,7 @@ export default function ArchitectureVisualizer() {
                 style={styles.simulateBtn}
               >
                 <Zap size={14} style={{ color: isSimulating ? 'var(--color-ai-magenta)' : 'inherit' }} />
-                {isSimulating ? 'SIMULATING...' : 'RUN PIPELINE SIMULATION'}
+                {isSimulating ? 'SIMULATING...' : 'SIMULATE DATA FLOW'}
               </button>
             </div>
 

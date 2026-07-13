@@ -1,4 +1,4 @@
-import { Cpu, Cloud, Settings, ExternalLink, Zap } from 'lucide-react';
+import { Cpu, Cloud, Globe, Settings, ExternalLink, Zap, Clock, Wrench } from 'lucide-react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 const Github = ({ size = 16, ...props }) => (
@@ -19,58 +19,89 @@ const Github = ({ size = 16, ...props }) => (
   </svg>
 );
 
-
 export default function Projects({ activeFilter, onFilterChange }) {
   const [headerRef, headerVisible] = useScrollReveal();
   const [contentRef, contentVisible] = useScrollReveal();
-  const projects = [
+
+  // Completed Projects
+  const completedProjects = [
     {
-      id: 'ai-classifier',
-      title: 'AI Object Detection & Classification',
-      category: 'ai-ml',
-      icon: <Cpu size={18} />,
-      color: 'var(--color-ai-magenta)',
-      desc: 'A deep learning application leveraging PyTorch and YOLO models to classify and detect objects from image inputs in real time.',
-      telemetry: 'Optimizes inference runtimes and image loading sequences to achieve processing latency under 45ms per frame on standard hardware.',
-      techs: ['PyTorch', 'YOLO v8', 'OpenCV', 'FastAPI', 'Python'],
-      github: 'https://github.com/Shiva134-ui',
-      demo: '#'
-    },
-    {
-      id: 'fullstack-dashboard',
-      title: 'Full-Stack Dev-Analytics Dashboard',
+      id: 'portfolio',
+      title: 'Portfolio Website',
       category: 'full-stack',
-      icon: <Settings size={18} />,
+      icon: <Globe size={18} />,
+      color: 'var(--color-cloud-cyan)',
+      desc: 'Designed and developed a modern developer portfolio using React and modern frontend technologies to showcase projects, skills, certifications, and career journey.',
+      telemetry: 'Built with React, Vite, and CSS. Features terminal animations, architecture visualizer, smooth scroll reveal effects, and a fully responsive futuristic dark UI.',
+      techs: ['React', 'JavaScript', 'CSS', 'Vite'],
+      github: 'https://github.com/Shiva134-ui',
+      demo: 'https://www.madesh.in',
+      status: 'completed'
+    },
+    {
+      id: 'streamx',
+      title: 'StreamX',
+      category: 'full-stack',
+      icon: <Cpu size={18} />,
       color: 'var(--color-cyber-purple)',
-      desc: 'A modern, responsive web dashboard that aggregates system metrics, repository updates, and telemetry logs into a unified view.',
-      telemetry: 'Built with React for UI, backed by a Node.js/Express API with custom caching and charts, securing user sessions via JWT.',
-      techs: ['React', 'Node.js', 'MongoDB', 'Express', 'Vite'],
-      github: 'https://github.com/Shiva134-ui',
-      demo: '#'
+      desc: 'Details coming soon — project documentation is being prepared.',
+      telemetry: 'Technical details, features, and architecture documentation will be updated here soon.',
+      techs: ['Coming Soon'],
+      github: null,
+      demo: null,
+      status: 'completed'
     },
     {
-      id: 'serverless-pipeline',
-      title: 'Serverless Cloud Data Pipeline',
-      category: 'cloud-infra',
-      icon: <Cloud size={18} />,
+      id: 'luvia-luxury',
+      title: 'Luvia Luxury',
+      category: 'full-stack',
+      icon: <Globe size={18} />,
       color: 'var(--color-cloud-cyan)',
-      desc: 'A scalable cloud ingestion pipeline designed to ingest, process, and archive streaming telemetry metrics automatically.',
-      telemetry: 'Uses AWS Lambda functions triggered by S3 data uploads, storing processed document states in DynamoDB with automated alerts.',
-      techs: ['AWS Lambda', 'DynamoDB', 'S3 Buckets', 'Python', 'Terraform'],
-      github: 'https://github.com/Shiva134-ui',
-      demo: '#'
+      desc: 'Details coming soon — project documentation is being prepared.',
+      telemetry: 'Technical details, features, and architecture documentation will be updated here soon.',
+      techs: ['Coming Soon'],
+      github: null,
+      demo: null,
+      status: 'completed'
+    }
+  ];
+
+  // Currently Building
+  const buildingProjects = [
+    {
+      id: 'network-homelab',
+      title: 'Enterprise Network & Data Center Home Lab',
+      desc: 'Building a hands-on enterprise-grade networking and data center lab to study routing, switching, VLANs, server management, and real infrastructure concepts.',
+      color: 'var(--color-cloud-cyan)',
+      icon: <Cloud size={18} />
     },
     {
-      id: 'selfhosted-homelab',
-      title: 'Self-Hosted Private Cloud & Homelab',
-      category: 'cloud-infra',
-      icon: <Cloud size={18} />,
+      id: 'devops-homelab',
+      title: 'DevOps Home Lab',
+      desc: 'Setting up a self-hosted DevOps environment with CI/CD pipelines, Docker containers, Kubernetes clusters, and monitoring tools to practice infrastructure automation.',
+      color: 'var(--color-ai-magenta)',
+      icon: <Wrench size={18} />
+    },
+    {
+      id: 'self-hosted-platform',
+      title: 'Self-Hosted Developer Platform',
+      desc: 'Deploying a self-hosted suite of developer tools including Git hosting, container registry, and project management on personal Linux servers.',
+      color: 'var(--color-cyber-purple)',
+      icon: <Settings size={18} />
+    },
+    {
+      id: 'cloud-native-devops',
+      title: 'Cloud-Native DevOps Platform',
+      desc: 'Learning and implementing a cloud-native DevOps platform using AWS or Azure, integrating containerized microservices with automated deployment pipelines.',
       color: 'var(--color-cloud-cyan)',
-      desc: 'A secure, containerized private cloud infrastructure self-hosted on local hardware with automated deployment workflows.',
-      telemetry: 'Uses Docker Compose to manage home-cloud containers, Nginx reverse proxy for SSL routing, and local network DNS configs.',
-      techs: ['Docker', 'Docker Compose', 'Nginx', 'Linux OS', 'GitHub Actions'],
-      github: 'https://github.com/Shiva134-ui',
-      demo: '#'
+      icon: <Cloud size={18} />
+    },
+    {
+      id: 'mlops-pipeline',
+      title: 'MLOps Pipeline',
+      desc: 'Exploring MLOps by building a machine learning pipeline with automated training, versioning, monitoring, and deployment workflows using Python and open-source tools.',
+      color: 'var(--color-ai-magenta)',
+      icon: <Cpu size={18} />
     }
   ];
 
@@ -79,15 +110,14 @@ export default function Projects({ activeFilter, onFilterChange }) {
   };
 
   const filteredProjects = activeFilter === 'all'
-    ? projects
-    : projects.filter(p => p.category === activeFilter);
+    ? completedProjects
+    : completedProjects.filter(p => p.category === activeFilter);
 
   const getFilterLabel = (filter) => {
     switch (filter) {
       case 'all': return 'ALL';
-      case 'ai-ml': return 'AI & ML';
-      case 'cloud-infra': return 'CLOUD & INFRA';
       case 'full-stack': return 'FULL STACK';
+      case 'cloud-infra': return 'CLOUD & INFRA';
       default: return filter.toUpperCase();
     }
   };
@@ -99,16 +129,16 @@ export default function Projects({ activeFilter, onFilterChange }) {
         
         <div ref={headerRef} className={`section-header reveal-down ${headerVisible ? 'visible' : ''}`}>
           <span className="badge badge-ai" style={{ marginBottom: '10px' }}>PROJECT SHOWCASE</span>
-          <h2 className="section-title">Systems Portfolio</h2>
+          <h2 className="section-title">Projects Portfolio</h2>
           <p className="section-subtitle">
-            A showcase of applications and systems combining custom AI classifiers, full-stack backends, and self-hosted environments.
+            Real-world projects I have built to deepen my understanding of full-stack development, infrastructure, and modern engineering.
           </p>
         </div>
 
         <div ref={contentRef} className={contentVisible ? 'visible' : ''}>
           {/* TAG FILTER NAVIGATION */}
           <div style={styles.filterBar} className="reveal-zoom projects-filter-bar">
-            {['all', 'ai-ml', 'cloud-infra', 'full-stack'].map(filter => (
+            {['all', 'full-stack', 'cloud-infra'].map(filter => (
               <button
                 key={filter}
                 onClick={() => handleFilterSelection(filter)}
@@ -117,7 +147,7 @@ export default function Projects({ activeFilter, onFilterChange }) {
                   color: activeFilter === filter ? 'var(--text-pure)' : 'var(--text-dark)',
                   backgroundColor: activeFilter === filter ? 'rgba(255,255,255,0.04)' : 'transparent',
                   borderColor: activeFilter === filter 
-                    ? (filter === 'ai-ml' ? 'var(--color-ai-magenta)' : filter === 'cloud-infra' ? 'var(--color-cloud-cyan)' : 'var(--color-cyber-purple)')
+                    ? (filter === 'cloud-infra' ? 'var(--color-cloud-cyan)' : 'var(--color-ai-magenta)')
                     : 'transparent'
                 }}
               >
@@ -126,7 +156,10 @@ export default function Projects({ activeFilter, onFilterChange }) {
             ))}
           </div>
 
-          {/* PROJECTS GRID */}
+          {/* COMPLETED PROJECTS GRID */}
+          <div style={styles.sectionLabel}>
+            <span style={styles.sectionLabelText}>✓ COMPLETED</span>
+          </div>
           <div style={styles.grid} className="stagger-container">
             {filteredProjects.map(project => (
               <div key={project.id} className="glass-panel reveal-up stagger-item" style={styles.card}>
@@ -136,8 +169,8 @@ export default function Projects({ activeFilter, onFilterChange }) {
                   <div style={{...styles.iconContainer, color: project.color, border: '1px solid var(--color-glass-border)'}}>
                     {project.icon}
                   </div>
-                  <span className={`badge ${project.category === 'cloud-infra' ? 'badge-cloud' : 'badge-ai'}`} style={{ fontSize: '0.7rem' }}>
-                    {project.category.toUpperCase().replace('-', ' ')}
+                  <span className="badge badge-ai" style={{ fontSize: '0.7rem', color: project.color === 'var(--color-cloud-cyan)' ? 'var(--color-cloud-cyan)' : undefined }}>
+                    {project.status === 'completed' ? 'COMPLETED' : 'IN PROGRESS'}
                   </span>
                 </div>
 
@@ -145,11 +178,11 @@ export default function Projects({ activeFilter, onFilterChange }) {
                 <h3 style={styles.cardTitle}>{project.title}</h3>
                 <p style={styles.cardDesc}>{project.desc}</p>
 
-                {/* Technical Telemetry Drawer (Unique Value) */}
+                {/* Technical Telemetry Drawer */}
                 <div style={styles.telemetryBox}>
                   <div style={styles.telemetryHeader}>
                     <Zap size={12} style={{ color: 'var(--color-cloud-cyan)', filter: 'drop-shadow(var(--glow-cyan))' }} />
-                    <span style={styles.telemetryTitle}>ARCHITECTURAL TELEMETRY</span>
+                    <span style={styles.telemetryTitle}>TECHNICAL NOTES</span>
                   </div>
                   <p style={styles.telemetryText}>{project.telemetry}</p>
                 </div>
@@ -165,17 +198,54 @@ export default function Projects({ activeFilter, onFilterChange }) {
 
                 {/* Action Buttons */}
                 <div style={styles.actions}>
-                  <a href={project.github} className="btn-icon" style={styles.actionBtn} title="View Source Code">
-                    <Github size={16} />
-                  </a>
-                  <a href={project.demo} className="btn-icon" style={styles.actionBtn} title="View Live Telemetry Dashboard">
-                    <ExternalLink size={16} />
-                  </a>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-icon" style={styles.actionBtn} title="View Source Code">
+                      <Github size={16} />
+                    </a>
+                  )}
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-icon" style={styles.actionBtn} title="View Live Demo">
+                      <ExternalLink size={16} />
+                    </a>
+                  )}
+                  {!project.github && !project.demo && (
+                    <span style={styles.comingSoonText}>Links coming soon</span>
+                  )}
                 </div>
 
               </div>
             ))}
           </div>
+
+          {/* CURRENTLY BUILDING SECTION */}
+          {(activeFilter === 'all' || activeFilter === 'cloud-infra') && (
+            <div style={{ marginTop: '60px' }}>
+              <div style={styles.sectionLabel}>
+                <Clock size={14} style={{ color: 'var(--color-cloud-cyan)' }} />
+                <span style={{...styles.sectionLabelText, color: 'var(--color-cloud-cyan)'}}>CURRENTLY BUILDING</span>
+              </div>
+              <p style={styles.buildingSubtitle}>
+                These are active projects and learning goals I am currently working on. They represent my roadmap toward becoming a DevOps Engineer.
+              </p>
+              <div style={styles.buildingGrid} className="stagger-container">
+                {buildingProjects.map(project => (
+                  <div key={project.id} className="glass-panel reveal-up stagger-item" style={styles.buildingCard}>
+                    <div style={styles.cardHeader}>
+                      <div style={{...styles.iconContainer, color: project.color, border: '1px solid var(--color-glass-border)'}}>
+                        {project.icon}
+                      </div>
+                      <span style={{...styles.buildingBadge, borderColor: project.color, color: project.color}}>
+                        <span style={styles.buildingDot} />
+                        IN PROGRESS
+                      </span>
+                    </div>
+                    <h3 style={styles.cardTitle}>{project.title}</h3>
+                    <p style={styles.cardDesc}>{project.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
       </div>
@@ -188,7 +258,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     gap: '12px',
-    marginBottom: '40px',
+    marginBottom: '30px',
     flexWrap: 'wrap',
   },
   filterBtn: {
@@ -202,11 +272,25 @@ const styles = {
     letterSpacing: '0.08em',
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   },
+  sectionLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '20px',
+    marginTop: '10px',
+  },
+  sectionLabelText: {
+    fontSize: '0.72rem',
+    fontFamily: 'var(--font-mono)',
+    color: '#27c93f',
+    letterSpacing: '0.12em',
+    fontWeight: '600',
+  },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-    gap: '30px',
-    marginTop: '20px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+    gap: '24px',
+    marginBottom: '20px',
   },
   card: {
     padding: '24px',
@@ -233,7 +317,7 @@ const styles = {
     justifyContent: 'center',
   },
   cardTitle: {
-    fontSize: '1.25rem',
+    fontSize: '1.1rem',
     fontFamily: 'var(--font-display)',
     fontWeight: '700',
     color: 'var(--text-bright)',
@@ -287,9 +371,57 @@ const styles = {
   actions: {
     display: 'flex',
     gap: '10px',
+    alignItems: 'center',
   },
   actionBtn: {
     width: '36px',
     height: '36px',
-  }
+  },
+  comingSoonText: {
+    fontSize: '0.72rem',
+    fontFamily: 'var(--font-mono)',
+    color: 'var(--text-dark)',
+    letterSpacing: '0.05em',
+  },
+  buildingSubtitle: {
+    fontSize: '0.9rem',
+    color: 'var(--text-muted)',
+    lineHeight: 1.5,
+    marginBottom: '24px',
+    maxWidth: '700px',
+  },
+  buildingGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+    gap: '20px',
+  },
+  buildingCard: {
+    padding: '22px',
+    backgroundColor: 'rgba(255,255,255,0.012)',
+    border: '1px solid rgba(255,255,255,0.04)',
+    borderRadius: '14px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  buildingBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '5px',
+    fontSize: '0.62rem',
+    fontFamily: 'var(--font-mono)',
+    fontWeight: '600',
+    letterSpacing: '0.08em',
+    padding: '3px 8px',
+    borderRadius: '10px',
+    border: '1px solid transparent',
+    backgroundColor: 'rgba(255,255,255,0.03)',
+  },
+  buildingDot: {
+    display: 'inline-block',
+    width: '5px',
+    height: '5px',
+    borderRadius: '50%',
+    backgroundColor: 'currentColor',
+    animation: 'pulse 1.5s ease-in-out infinite',
+  },
 };

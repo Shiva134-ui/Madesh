@@ -244,7 +244,7 @@ export default function App() {
           {/* Logo */}
           <div style={appStyles.logoGroup} onClick={() => scrollToSection('hero')}>
             <Cpu size={20} style={{ color: 'var(--color-ai-magenta)' }} />
-            <span style={appStyles.logoText}>MADESH<span style={{ color: 'var(--color-cloud-cyan)' }}>.IO</span></span>
+            <span style={appStyles.logoText}>MADESH<span style={{ color: 'var(--color-cloud-cyan)' }}>.IN</span></span>
           </div>
 
           {/* Desktop Nav */}
@@ -405,11 +405,11 @@ export default function App() {
       {/* SECURE FOOTER */}
       <footer style={appStyles.footer}>
         <div className="container" style={appStyles.footerContainer}>
-          <span style={appStyles.copyText}>© 2026 MADESH S. ALL SYSTEMS SECURED.</span>
+          <span style={appStyles.copyText}>© 2026 MADESH S. NADAR. ALL RIGHTS RESERVED.</span>
           <div style={appStyles.madeWith}>
             <span>MADE WITH</span>
             <Heart size={12} style={{ color: 'var(--color-ai-magenta)', filter: 'drop-shadow(var(--glow-magenta))' }} />
-            <span>FOR CLOUD & AI DEPLOYS</span>
+            <span>FOR DEVOPS & CLOUD</span>
           </div>
         </div>
       </footer>

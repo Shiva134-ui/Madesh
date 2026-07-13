@@ -4,10 +4,10 @@ import confetti from 'canvas-confetti';
 
 export default function Terminal({ isOpen, onClose, triggerCommand }) {
   const [history, setHistory] = useState([
-    { text: 'MADESH OPERATIONAL SYSTEMS v4.2.1', type: 'system' },
-    { text: 'Establishing secure connection...', type: 'system' },
-    { text: 'ESTABLISHING AWS SECURE ROUTING... DONE', type: 'system' },
-    { text: "Type 'help' to review available terminal actions.", type: 'system' }
+    { text: 'MADESH.IN PORTFOLIO TERMINAL v1.0.0', type: 'system' },
+    { text: 'Initializing portfolio session...', type: 'system' },
+    { text: 'CONNECTION ESTABLISHED — READY', type: 'system' },
+    { text: "Type 'help' to see available commands.", type: 'system' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const terminalEndRef = useRef(null);
@@ -34,38 +34,57 @@ export default function Terminal({ isOpen, onClose, triggerCommand }) {
     switch (cmd) {
       case 'help':
         newHistory.push(
-          { text: 'Available System Operations:', type: 'system' },
-          { text: '  skills       - Telemetry scan of core ML, Cloud, and engineering skills.', type: 'info' },
-          { text: '  projects     - Scan full list of deployed cloud & AI projects.', type: 'info' },
-          { text: '  certs        - Scan professional certifications & qualifications.', type: 'info' },
-          { text: '  sudo deploy  - Run production MLOps pipeline container deployment.', type: 'warning' },
-          { text: '  clear        - Flush terminal buffer history.', type: 'info' }
+          { text: 'Available Commands:', type: 'system' },
+          { text: '  skills       - View my current tech skills and learning stack.', type: 'info' },
+          { text: '  projects     - List my completed and in-progress projects.', type: 'info' },
+          { text: '  certs        - Show my verified certifications.', type: 'info' },
+          { text: '  about        - Display personal info and career objective.', type: 'info' },
+          { text: '  sudo deploy  - Run a DevOps deployment simulation.', type: 'warning' },
+          { text: '  clear        - Clear terminal history.', type: 'info' }
         );
         break;
       case 'skills':
         newHistory.push(
-          { text: '--- CORE CAPABILITIES ANALYSIS ---', type: 'system' },
-          { text: '  [AI/ML]      PyTorch, TensorFlow, SageMaker Pipelines, NLP/RAG, LLMs', type: 'info' },
-          { text: '  [CLOUD]      AWS (VPC, ECS, Lambda, IAM), GCP, Infrastructure-as-Code (Terraform)', type: 'info' },
-          { text: '  [DATA]       Pinecone, Redis, PostgreSQL, Snowflake, Apache Spark', type: 'info' },
-          { text: '  [DEVOPS]     Docker, Kubernetes, GitHub Actions (CI/CD), MLflow', type: 'info' }
+          { text: '--- SKILLS & LEARNING STACK ---', type: 'system' },
+          { text: '  [LANGUAGES]   Python, JavaScript, Java, HTML/CSS, Go (learning)', type: 'info' },
+          { text: '  [WEB]         React, Node.js, Firebase, MySQL, MongoDB (learning)', type: 'info' },
+          { text: '  [NETWORKING]  TCP/IP, OSI Model, DNS, HTTP/S, NAT, PAT, Routing', type: 'info' },
+          { text: '  [LINUX]       Ubuntu, CLI commands, Shell scripting basics', type: 'info' },
+          { text: '  [DEVOPS]      Docker, GitHub Actions, AWS, Kubernetes (all learning)', type: 'info' },
+          { text: '  [VERSION CTRL] Git, GitHub', type: 'info' }
         );
         break;
       case 'projects':
         newHistory.push(
-          { text: '--- PRODUCTION SYSTEMS SCAN ---', type: 'system' },
-          { text: '  1. Real-time Video MLOps Pipeline (AWS, ECS, Terraform, PyTorch, Docker)', type: 'info' },
-          { text: '  2. RAG AI Cloud Monitor Agent (FastAPI, LangChain, Pinecone, GCP)', type: 'info' },
-          { text: '  3. High-throughput Serverless Data Collector (AWS Lambda, Kinesis, S3)', type: 'info' },
-          { text: '  4. Distributed Deep Learning Trainer (Kubernetes, AWS Spot Instances)', type: 'info' }
+          { text: '--- PROJECTS ---', type: 'system' },
+          { text: '  ✔ Portfolio Website    (React, Vite, CSS) — madesh.in', type: 'success' },
+          { text: '  ✔ Janvi Boutique       (HTML, CSS, JS, Firebase) — E-commerce site', type: 'success' },
+          { text: '  ✔ StreamX              (Details coming soon)', type: 'info' },
+          { text: '  ✔ Luvia Luxury         (Details coming soon)', type: 'info' },
+          { text: '  ⟳ Enterprise Network & Data Center Home Lab [IN PROGRESS]', type: 'warning' },
+          { text: '  ⟳ DevOps Home Lab                           [IN PROGRESS]', type: 'warning' },
+          { text: '  ⟳ Cloud-Native DevOps Platform              [IN PROGRESS]', type: 'warning' }
         );
         break;
       case 'certs':
         newHistory.push(
-          { text: '--- ACQUIRED PROFESSIONAL QUALIFICATIONS ---', type: 'system' },
-          { text: '  ✔ AWS Certified Solutions Architect - Associate', type: 'success' },
-          { text: '  ✔ AWS Certified Machine Learning - Specialty', type: 'success' },
-          { text: '  ✔ Google Cloud Professional Cloud Architect (Candidate)', type: 'info' }
+          { text: '--- CERTIFICATIONS ---', type: 'system' },
+          { text: '  ✔ Claude with Google Vertex AI — Anthropic', type: 'success' },
+          { text: '  ✔ C++ Programming — GreyLearn', type: 'success' },
+          { text: '  ✔ Advanced Excel — GreyLearn', type: 'success' },
+          { text: '  ⟳ AWS Certification — Target: In Progress', type: 'info' }
+        );
+        break;
+      case 'about':
+        newHistory.push(
+          { text: '--- ABOUT MADESH S. NADAR ---', type: 'system' },
+          { text: '  Name:     Madesh S. Nadar', type: 'info' },
+          { text: '  Role:     Aspiring DevOps Engineer | CSE Student', type: 'info' },
+          { text: '  College:  SCAD College of Engineering & Technology', type: 'info' },
+          { text: '  CGPA:     7.5 | Batch: 2023–2027', type: 'info' },
+          { text: '  Location: Cheranmahadevi, Tamil Nadu, India', type: 'info' },
+          { text: '  Email:    sivamadesh.134@gmail.com', type: 'info' },
+          { text: '  GitHub:   github.com/Shiva134-ui', type: 'info' }
         );
         break;
       case 'clear':
@@ -74,15 +93,14 @@ export default function Terminal({ isOpen, onClose, triggerCommand }) {
         return;
       case 'sudo deploy':
         newHistory.push(
-          { text: '⚠ WARNING: INITIATING PRODUCTION DEPLOYMENT SEQUENCE ⚠', type: 'warning' },
-          { text: '🚀 Allocating AWS EC2 Auto-Scaling compute nodes...', type: 'system' },
-          { text: '🐳 Containerizing PyTorch model inference with Docker...', type: 'system' },
-          { text: '⚡ Injecting pinecone vector contexts & cache...', type: 'system' },
-          { text: '⚙ Compiling TensorRT model engine... 3x performance increase verified.', type: 'system' },
-          { text: '🔥 DEPLOYMENT SUCCESSFUL! API GATEWAY ROUTE SECURED.', type: 'success' }
+          { text: '⚠ INITIATING DEVOPS DEPLOYMENT SIMULATION ⚠', type: 'warning' },
+          { text: '🐳 Building Docker container image...', type: 'system' },
+          { text: '⚙  Running GitHub Actions CI/CD pipeline...', type: 'system' },
+          { text: '☁  Pushing to cloud registry...', type: 'system' },
+          { text: '🚀 Deploying to environment...', type: 'system' },
+          { text: '✅ DEPLOYMENT SIMULATION COMPLETE!', type: 'success' }
         );
         
-        // Trigger explosive confetti celebration!
         setTimeout(() => {
           confetti({
             particleCount: 150,

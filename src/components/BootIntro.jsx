@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const BOOT_LINES = [
-  { text: 'MADESH.IO OS v2.6.4 — Kernel initializing...', delay: 0,    color: 'var(--text-muted)' },
-  { text: '> Loading AI subsystems..................', delay: 300,  color: 'var(--text-muted)' },
-  { text: '  ✓ PyTorch Neural Engine         [ONLINE]', delay: 650,  color: '#27c93f' },
-  { text: '  ✓ AWS Cloud Orchestrator        [ONLINE]', delay: 950,  color: '#27c93f' },
-  { text: '  ✓ MLOps Pipeline Daemon         [ONLINE]', delay: 1200, color: '#27c93f' },
-  { text: '> Mounting distributed file systems...', delay: 1500, color: 'var(--text-muted)' },
-  { text: '  ✓ Pinecone Vector Store         [MOUNTED]', delay: 1750, color: '#27c93f' },
-  { text: '  ✓ Terraform State Backend       [SYNCED]', delay: 2000, color: '#27c93f' },
-  { text: '> Verifying cloud credentials...', delay: 2250, color: 'var(--text-muted)' },
-  { text: '  ✓ IAM Role — LeadMLOpsEngineer  [GRANTED]', delay: 2500, color: '#27c93f' },
+  { text: 'MADESH.IN OS v1.0.0 — Portfolio initializing...', delay: 0,    color: 'var(--text-muted)' },
+  { text: '> Loading developer profile...............', delay: 300,  color: 'var(--text-muted)' },
+  { text: '  ✓ Linux & Ubuntu CLI            [ONLINE]', delay: 650,  color: '#27c93f' },
+  { text: '  ✓ Python & JavaScript           [ONLINE]', delay: 950,  color: '#27c93f' },
+  { text: '  ✓ Git & GitHub                  [ONLINE]', delay: 1200, color: '#27c93f' },
+  { text: '> Mounting networking stack...', delay: 1500, color: 'var(--text-muted)' },
+  { text: '  ✓ TCP/IP & OSI Model            [LOADED]', delay: 1750, color: '#27c93f' },
+  { text: '  ✓ DNS & HTTP/HTTPS              [LOADED]', delay: 2000, color: '#27c93f' },
+  { text: '> Bootstrapping DevOps learning environment...', delay: 2250, color: 'var(--text-muted)' },
+  { text: '  ✓ Docker & GitHub Actions       [LEARNING]', delay: 2500, color: 'hsl(45,100%,60%)' },
   { text: '', delay: 2700, color: 'transparent' },
   { text: '════════════════════════════════════════', delay: 2800, color: 'rgba(255,255,255,0.12)' },
-  { text: '  All systems nominal. Welcome, Madesh.', delay: 3000, color: 'var(--text-pure)', bold: true },
+  { text: '  Welcome. Systems ready, Madesh.', delay: 3000, color: 'var(--text-pure)', bold: true },
   { text: '════════════════════════════════════════', delay: 3200, color: 'rgba(255,255,255,0.12)' },
 ];
 
@@ -118,10 +118,10 @@ export default function BootIntro({ onComplete }) {
         {/* Header */}
         <div style={{ marginBottom: '32px', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '16px' }}>
           <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.2em', marginBottom: '6px' }}>
-            MADESH.IO PORTFOLIO OS — BIOS v2.6.4
+            MADESH.IN PORTFOLIO OS — v1.0.0
           </div>
           <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.12)', letterSpacing: '0.1em' }}>
-            Copyright © 2026 Madesh S — All Rights Reserved
+            Copyright © 2026 Madesh S. Nadar — All Rights Reserved
           </div>
         </div>
 
