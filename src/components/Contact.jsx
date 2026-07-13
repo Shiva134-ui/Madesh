@@ -27,31 +27,55 @@ export default function Contact() {
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
 
-    // Simulate secure cloud transmission API post
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-
-      // Trigger spectacular success confetti!
-      confetti({
-        particleCount: 100,
-        spread: 60,
-        origin: { y: 0.8 },
-        colors: ['#ffffff', '#888888', '#cccccc', '#333333']
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "f94b78ab-6009-4bb5-91bf-7695f5a36efc",
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `New Portfolio Message from ${formData.name}`,
+          from_name: "Portfolio Contact System",
+        }),
       });
 
-      // Reset form after a small delay
-      setTimeout(() => {
-        setIsSuccess(false);
-        setFormData({ name: '', email: '', message: '' });
-      }, 5000);
-    }, 1500);
+      const result = await response.json();
+      if (result.success) {
+        setIsSuccess(true);
+        // Trigger spectacular success confetti!
+        confetti({
+          particleCount: 100,
+          spread: 60,
+          origin: { y: 0.8 },
+          colors: ['#ffffff', '#888888', '#cccccc', '#333333']
+        });
+
+        // Reset form after a small delay
+        setTimeout(() => {
+          setIsSuccess(false);
+          setFormData({ name: '', email: '', message: '' });
+        }, 5000);
+      } else {
+        console.error("Form submission error:", result);
+        alert("Failed to send transmission. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Form submission exception:", error);
+      alert("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
