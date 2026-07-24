@@ -59,7 +59,7 @@ export default function Terminal({ isOpen, onClose, triggerCommand }) {
           { text: '--- PROJECTS ---', type: 'system' },
           { text: '  ✔ Portfolio Website    (React, Vite, CSS) — madesh.in', type: 'success' },
           { text: '  ✔ Janvi Boutique       (HTML, CSS, JS, Firebase) — E-commerce site', type: 'success' },
-          { text: '  ✔ StreamX              (Details coming soon)', type: 'info' },
+          { text: '  ✔ StreamX              (HTML/CSS/JS, Firebase, Cloudinary) — streamx.madesh.in', type: 'success' },
           { text: '  ✔ Luvia Luxury         (Details coming soon)', type: 'info' },
           { text: '  ⟳ Enterprise Network & Data Center Home Lab [IN PROGRESS]', type: 'warning' },
           { text: '  ⟳ DevOps Home Lab                           [IN PROGRESS]', type: 'warning' },
