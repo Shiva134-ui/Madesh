@@ -4,7 +4,7 @@
 
 ### Modern Developer Portfolio showcasing my projects, skills, and journey.
 
-[🌍 Live Website](https://madesh.in) • [💼 LinkedIn](#) • [📧 Email](mailto:your@email.com)
+[🌍 Live Website](https://madesh.in) • [💼 LinkedIn](https://www.linkedin.com/in/madesh-s-927138328/) • [📧 Email](mailto:sivamadesh.134@gmail.com)
 
 </div>
 
@@ -42,19 +42,19 @@ The website serves as a central hub where visitors can:
 ### Home
 
 <p align="center">
-<img src="./screenshots/home.png" width="900"/>
+<img src="./src/assets/screenshots/home.png" width="900"/>
 </p>
 
 ### Projects
 
 <p align="center">
-<img src="./screenshots/projects.png" width="900"/>
+<img src="./src/assets/screenshots/projects.png" width="900"/>
 </p>
 
 ### Contact
 
 <p align="center">
-<img src="./screenshots/contact.png" width="900"/>
+<img src="./src/assets/screenshots/contacts.png" width="900"/>
 </p>
 
 ---
@@ -100,7 +100,7 @@ portfolio/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/portfolio.git
+git clone https://github.com/Shiva134-ui/portfolio.git
 ```
 
 ### Install Dependencies
@@ -137,8 +137,8 @@ https://madesh.in
 
 - GitHub: https://github.com/Shiva134-ui
 - Portfolio: https://madesh.in
-- LinkedIn: https://linkedin.com/in/YOUR_LINKEDIN
-- Email: your@email.com
+- LinkedIn: https://www.linkedin.com/in/madesh-s-927138328/
+- Email: sivamadesh.134@gmail.com
 
 ---
 
