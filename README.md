@@ -1,16 +1,155 @@
-# React + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🌐 Madesh Portfolio
 
-Currently, two official plugins are available:
+### Modern Developer Portfolio showcasing my projects, skills, and journey.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[🌍 Live Website](https://madesh.in) • [💼 LinkedIn](#) • [📧 Email](mailto:your@email.com)
 
-## React Compiler
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📖 About
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is my personal portfolio website built to showcase my work, technical skills, and projects.
+
+The website serves as a central hub where visitors can:
+
+- 👨‍💻 Learn about me
+- 🚀 Explore my projects
+- 🛠 View my technical skills
+- 📄 Download my resume
+- 📬 Contact me
+
+---
+
+## ✨ Features
+
+- 🎨 Modern Responsive UI
+- ⚡ Fast Performance
+- 🌙 Clean Dark Theme
+- 📱 Mobile Friendly
+- 🚀 Project Showcase
+- 🧑 About Me Section
+- 📞 Contact Section
+- 🔗 Social Links
+
+---
+
+## 🖼 Screenshots
+
+### Home
+
+<p align="center">
+<img src="./screenshots/home.png" width="900"/>
+</p>
+
+### Projects
+
+<p align="center">
+<img src="./screenshots/projects.png" width="900"/>
+</p>
+
+### Contact
+
+<p align="center">
+<img src="./screenshots/contact.png" width="900"/>
+</p>
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+
+### Deployment
+
+- Vercel
+- Cloudflare
+
+---
+
+## 📂 Project Structure
+
+```
+portfolio/
+│
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── styles/
+│   └── App.jsx
+│
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## 🚀 Getting Started
+
+### Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/portfolio.git
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+---
+
+## 🌍 Live Demo
+
+**Website**
+
+https://madesh.in
+
+---
+
+## 📬 Contact
+
+**Madesh**
+
+- GitHub: https://github.com/Shiva134-ui
+- Portfolio: https://madesh.in
+- LinkedIn: https://linkedin.com/in/YOUR_LINKEDIN
+- Email: your@email.com
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub.
+
+---
+
+<div align="center">
+
+Made with ❤️ by Madesh
+
+</div>
