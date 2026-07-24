@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Hero from './components/Hero';
 import BootIntro from './components/BootIntro';
 import GitHubStats from './components/GitHubStats';
@@ -10,9 +11,14 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import AIAssistant from './components/AIAssistant';
 import Terminal from './components/Terminal';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import CertificatesPage from './pages/CertificatesPage';
+import CertificateDetailPage from './pages/CertificateDetailPage';
 import { Menu, X, Settings as SettingsIcon, Terminal as TerminalIcon, Cpu, Heart, Keyboard } from 'lucide-react';
 
 export default function App() {
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [theme, setTheme] = useState('cosmic');
@@ -249,7 +255,7 @@ export default function App() {
 
           {/* Desktop Nav */}
           <nav style={appStyles.desktopNav}>
-            {['architecture', 'skills', 'projects', 'experience', 'certifications', 'contact'].map(sec => (
+            {['architecture', 'skills', 'experience', 'contact'].map(sec => (
               <button 
                 key={sec} 
                 onClick={() => handleInteractiveClick(() => scrollToSection(sec))} 
@@ -259,6 +265,20 @@ export default function App() {
                 {sec.toUpperCase()}
               </button>
             ))}
+            <button
+              onClick={() => handleInteractiveClick(() => navigate('/projects'))}
+              style={appStyles.navLink}
+              className="nav-link-btn"
+            >
+              PROJECTS
+            </button>
+            <button
+              onClick={() => handleInteractiveClick(() => navigate('/certificates'))}
+              style={appStyles.navLink}
+              className="nav-link-btn"
+            >
+              CERTS
+            </button>
           </nav>
 
           {/* Nav Icons Right */}
@@ -308,7 +328,7 @@ export default function App() {
       {mobileMenuOpen && (
         <div ref={mobileMenuRef} style={appStyles.mobileMenu} className="glass-panel mobile-menu">
           <nav style={appStyles.mobileNavList}>
-            {['architecture', 'skills', 'projects', 'experience', 'certifications', 'contact'].map(sec => (
+            {['architecture', 'skills', 'experience', 'contact'].map(sec => (
               <button 
                 key={sec} 
                 onClick={() => handleInteractiveClick(() => scrollToSection(sec))} 
@@ -317,9 +337,22 @@ export default function App() {
                 {sec.toUpperCase()}
               </button>
             ))}
+            <button
+              onClick={() => handleInteractiveClick(() => navigate('/projects'))}
+              style={appStyles.mobileNavLink}
+            >
+              PROJECTS
+            </button>
+            <button
+              onClick={() => handleInteractiveClick(() => navigate('/certificates'))}
+              style={appStyles.mobileNavLink}
+            >
+              CERTIFICATES
+            </button>
           </nav>
         </div>
       )}
+
 
       {/* SETTINGS DRAWER */}
       {settingsOpen && (
@@ -365,42 +398,54 @@ export default function App() {
         </div>
       )}
 
-      {/* PORTFOLIO SECTIONS SECTIONS */}
-      <main style={appStyles.mainContent}>
-        
-        {/* HERO SECTION */}
-        <Hero 
-          soundEnabled={soundEnabled}
-          theme={theme}
-          onExploreProjects={() => scrollToSection('architecture')}
-          onContactClick={() => scrollToSection('contact')}
-        />
+      {/* PORTFOLIO SECTIONS */}
+      <Routes>
+        {/* ── HOMEPAGE ── */}
+        <Route path="/" element={
+          <main style={appStyles.mainContent}>
+            <Hero 
+              soundEnabled={soundEnabled}
+              theme={theme}
+              onExploreProjects={() => scrollToSection('architecture')}
+              onContactClick={() => scrollToSection('contact')}
+            />
+            <GitHubStats />
+            <ArchitectureVisualizer />
+            <Skills />
+            <Projects 
+              activeFilter={projectFilterTag}
+              onFilterChange={(tag) => setProjectFilterTag(tag)}
+            />
+            <Experience />
+            <Certifications />
+            <Contact />
+          </main>
+        } />
 
-        {/* LIVE GITHUB STATS STRIP */}
-        <GitHubStats />
+        {/* ── PROJECTS PAGES ── */}
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
 
-        {/* INTERACTIVE PIPELINE ARCHITECTURE */}
-        <ArchitectureVisualizer />
+        {/* ── CERTIFICATES PAGES ── */}
+        <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/certificates/:slug" element={<CertificateDetailPage />} />
 
-        {/* LAYERED SKILLS MATRIX */}
-        <Skills />
-
-        {/* FILTERABLE PROJECTS GRID */}
-        <Projects 
-          activeFilter={projectFilterTag}
-          onFilterChange={(tag) => setProjectFilterTag(tag)}
-        />
-
-        {/* CHRONOLOGICAL EXPERIENCE TIMELINE */}
-        <Experience />
-
-        {/* GLOWING CERTIFICATION BADGES CAROUSEL */}
-        <Certifications />
-
-        {/* DYNAMIC CONTACT ROUTER */}
-        <Contact />
-
-      </main>
+        {/* ── 404 fallback ── */}
+        <Route path="*" element={
+          <main style={{ ...appStyles.mainContent, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+            <div style={{ textAlign: 'center' }}>
+              <h2 style={{ color: 'var(--text-bright)', fontSize: '2rem', marginBottom: '12px' }}>404 — Page Not Found</h2>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>The page you're looking for doesn't exist.</p>
+              <button
+                onClick={() => navigate('/')}
+                style={{ background: 'var(--color-ai-magenta)', color: '#000', border: 'none', borderRadius: '8px', padding: '10px 24px', cursor: 'pointer', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.85rem' }}
+              >
+                ← Back to Home
+              </button>
+            </div>
+          </main>
+        } />
+      </Routes>
 
       {/* SECURE FOOTER */}
       <footer style={appStyles.footer}>
