@@ -121,7 +121,7 @@ export default function BootIntro({ onComplete }) {
             MADESH.IN PORTFOLIO OS — v1.0.0
           </div>
           <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.12)', letterSpacing: '0.1em' }}>
-            Copyright © 2026 Madesh S. Nadar — All Rights Reserved
+            Copyright © 2026 Madesh S — All Rights Reserved
           </div>
         </div>
 

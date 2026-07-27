@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Send, Bot, Sparkles, User, Zap } from 'lucide-react';
+import { X, Send, Bot, Sparkles, User, Zap, Terminal, Code2, Cpu, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,18 +7,28 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
     {
       id: 1,
       sender: 'bot',
-      text: "Greetings! I'm Madesh's AI Assistant. Ask me anything about his AI/ML research, cloud orchestrations, certifications, or projects. You can also select a quick-action scan below!",
+      text: "Hello! I'm Madesh's AI Copilot. Ask me anything about his DevOps journey, cloud infrastructure, certifications, or projects. You can also select a quick action below!",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+
   const chatEndRef = useRef(null);
   const typingIntervalRef = useRef(null);
   const panelRef = useRef(null);
   const floatingBtnRef = useRef(null);
-  const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+  const chipsScrollRef = useRef(null);
 
+  const scrollChips = (direction) => {
+    if (chipsScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -150 : 150;
+      chipsScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  // Eye-tracking & magnet effect for robot button
   useEffect(() => {
     const handleRobotMouseMove = (e) => {
       const el = document.getElementById('robot-assistant-btn');
@@ -40,7 +50,7 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
         y: Math.sin(angle) * moveDist
       });
 
-      const triggerRadius = 120;
+      const triggerRadius = 140;
       if (dist < triggerRadius && !isOpen) {
         const pullForce = (1 - dist / triggerRadius) * 18;
         const pullX = Math.cos(angle) * pullForce;
@@ -48,11 +58,11 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
         
         el.style.transition = 'transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)';
         el.style.transform = `translate3d(${pullX}px, ${pullY}px, 0) scale(1.08)`;
-        el.style.boxShadow = '0 0 25px rgba(255, 255, 255, 0.15)';
+        el.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.4)';
       } else {
         el.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         el.style.transform = '';
-        el.style.boxShadow = isOpen ? 'none' : 'var(--glow-magenta)';
+        el.style.boxShadow = isOpen ? 'none' : '0 0 15px rgba(255, 255, 255, 0.2)';
       }
     };
 
@@ -80,46 +90,42 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
   }, [isOpen]);
 
   const localKnowledge = {
-    intro: "Madesh S. Nadar is a Computer Science Engineering student passionate about DevOps, Cloud Computing, Networking, Linux, and Automation. His goal is to build scalable infrastructure, automate deployments, and create reliable systems while continuously learning through real-world projects.",
-    pytorch: "Madesh is building skills in programming and web development:\n\n• Python: Used for scripting, automation, and AI/ML exploration.\n• JavaScript & React: Building full-stack web applications.\n• Java: Learned as part of CSE curriculum.\n• Go: Currently learning as a systems programming language.",
-    sagemaker: "Madesh's DevOps and infrastructure learning path:\n\n• Docker: Currently learning containerization and deployment workflows.\n• Kubernetes: Studying orchestration concepts.\n• GitHub Actions: Setting up CI/CD pipelines.\n• AWS & Azure: Learning cloud fundamentals through hands-on projects.",
-    aws: "Madesh is actively learning cloud and DevOps tools:\n\n• AWS: Learning EC2, S3, IAM, and cloud fundamentals.\n• Azure: Exploring Microsoft Azure services.\n• Docker: Building containerized applications.\n• GitHub Actions: Implementing CI/CD pipelines.\n• Terraform: Exploring Infrastructure as Code concepts.",
-    experience: "Madesh's experience and education:\n\n• DevOps Intern at ICANIO Technologies — gained exposure to Linux, Git, DevOps workflows, and cloud concepts.\n• B.E. Computer Science & Engineering at SCAD College (2023–2027), CGPA: 7.5.\n• Currently building real projects to deepen DevOps, Networking, and Cloud skills.",
-    certifications: "Madesh holds verified certifications:\n\n• Claude with Google Vertex AI — Anthropic\n• C++ Programming — GreyLearn\n• Advanced Excel — GreyLearn\n\nCurrently working towards AWS Certifications.",
-    contact: "You can reach Madesh S directly:\n\n• Email: sivamadesh.134@gmail.com\n• Phone: +91 8928405063\n• Location: Cheranmahadevi, Tamil Nadu, India\n• GitHub: github.com/Shiva134-ui\n• LinkedIn: linkedin.com/in/madesh-nadar-927138328\n• YouTube: youtube.com/@mdhgamerz-h2m",
-    hiring: "Yes! Madesh is a CSE student actively preparing for a career in DevOps Engineering. He is open to internships, junior DevOps roles, networking opportunities, and cloud engineering positions. Feel free to reach out!",
-    deploy: "Opening the interactive developer console to explore the portfolio terminal...",
-    default: "I'm Madesh's portfolio assistant. Ask me about his DevOps learning journey, networking skills, projects, certifications, education, or contact information. You can also open the terminal for an interactive experience!"
+    intro: "Madesh S is an Aspiring DevOps Engineer and CSE Student (2023–2027) passionate about Cloud Infrastructure, Linux Automation, Containerization, and Systems Networking. His mission is to design resilient CI/CD pipelines and high-availability cloud solutions.",
+    techStack: "Madesh's core technical toolkit:\n\n• Cloud & Infrastructure: AWS (EC2, S3, IAM), Azure, Docker, Kubernetes, Terraform\n• Scripting & Dev: Python, Go, JavaScript, Bash, React\n• CI/CD & Automation: GitHub Actions, Linux Administration, Git Workflows\n• Networking: Systems Protocols, Subnetting, Security Fundamentals",
+    projects: "Madesh has built production-grade systems including:\n\n• Automated CI/CD Cloud Pipeline with Docker & GitHub Actions\n• Full-Stack Cloud Monitoring & Microservice Architecture\n• System Architecture Visualizer & Interactive CLI Tools",
+    experience: "Madesh's experience and education:\n\n• DevOps Intern @ ICANIO Technologies — Hands-on exposure to Linux systems, Git workflows, cloud concepts, and container deployment.\n• B.E. Computer Science & Engineering @ SCAD College (2023–2027) | CGPA: 7.5\n• Continuous Learner building real-world infrastructure automation projects.",
+    certifications: "Madesh holds verified technical credentials:\n\n• Anthropic — Claude with Google Vertex AI\n• GreyLearn — C++ Programming Certification\n• GreyLearn — Advanced Data Analytics & Excel\n\nCurrently preparing for AWS Certified Solutions Architect Associate.",
+    contact: "You can reach Madesh S directly:\n\n• Email: sivamadesh.134@gmail.com\n• Phone: +91 8928405063\n• Location: Cheranmahadevi, Tamil Nadu, India\n• LinkedIn: linkedin.com/in/madesh-s-927138328/\n• GitHub: github.com/Shiva134-ui\n• YouTube: youtube.com/@mdhgamerz-h2m",
+    hiring: "Yes! Madesh is actively looking for DevOps Internships, Junior DevOps Engineering roles, Cloud Administrator positions, and Infrastructure projects. Feel free to connect via email or LinkedIn!",
+    deploy: "Initializing developer console... Launching interactive terminal mode.",
+    default: "I'm Madesh's AI Copilot. Ask me about his DevOps learning journey, AWS/Docker skills, featured projects, certifications, education, or contact details. You can also launch the terminal for an interactive CLI experience!"
   };
 
   const getBotResponse = (text) => {
     const clean = text.toLowerCase().trim();
     
-    if (clean.includes('who is') || clean.includes('about madesh') || clean.includes('background') || clean.includes('intro') || clean.includes('profile')) {
+    if (clean.includes('who is') || clean.includes('about') || clean.includes('background') || clean.includes('intro') || clean.includes('profile') || clean.includes('bio')) {
       return { text: localKnowledge.intro };
     }
-    if (clean.includes('pytorch') || clean.includes('torch') || clean.includes('deep learning') || clean.includes('model') || clean.includes('nlp')) {
-      return { text: localKnowledge.pytorch, filter: 'ai-ml' };
+    if (clean.includes('stack') || clean.includes('skill') || clean.includes('docker') || clean.includes('kubernetes') || clean.includes('aws') || clean.includes('python') || clean.includes('linux')) {
+      return { text: localKnowledge.techStack, filter: 'devops' };
     }
-    if (clean.includes('sagemaker') || clean.includes('pipeline') || clean.includes('mlops') || clean.includes('inference')) {
-      return { text: localKnowledge.sagemaker, filter: 'mlops' };
+    if (clean.includes('project') || clean.includes('build') || clean.includes('code') || clean.includes('portfolio') || clean.includes('repo')) {
+      return { text: localKnowledge.projects, filter: 'all' };
     }
-    if (clean.includes('aws') || clean.includes('cloud') || clean.includes('terraform') || clean.includes('infra') || clean.includes('gcp') || clean.includes('kubernetes')) {
-      return { text: localKnowledge.aws, filter: 'cloud-infra' };
-    }
-    if (clean.includes('experience') || clean.includes('work') || clean.includes('career') || clean.includes('job') || clean.includes('history')) {
+    if (clean.includes('experience') || clean.includes('intern') || clean.includes('work') || clean.includes('college') || clean.includes('education') || clean.includes('history')) {
       return { text: localKnowledge.experience };
     }
-    if (clean.includes('certification') || clean.includes('cert') || clean.includes('credential')) {
+    if (clean.includes('certif') || clean.includes('cred') || clean.includes('anthropic') || clean.includes('vertex')) {
       return { text: localKnowledge.certifications };
     }
-    if (clean.includes('contact') || clean.includes('email') || clean.includes('phone') || clean.includes('reach') || clean.includes('call') || clean.includes('location')) {
+    if (clean.includes('contact') || clean.includes('email') || clean.includes('phone') || clean.includes('reach') || clean.includes('linkedin') || clean.includes('location')) {
       return { text: localKnowledge.contact };
     }
-    if (clean.includes('hire') || clean.includes('open to') || clean.includes('opportunity') || clean.includes('recruit')) {
+    if (clean.includes('hire') || clean.includes('role') || clean.includes('job') || clean.includes('opportunity') || clean.includes('open')) {
       return { text: localKnowledge.hiring };
     }
-    if (clean.includes('simulate') || clean.includes('sudo') || clean.includes('deploy') || clean.includes('terminal') || clean.includes('run')) {
+    if (clean.includes('deploy') || clean.includes('terminal') || clean.includes('cli') || clean.includes('run') || clean.includes('sudo')) {
       return { text: localKnowledge.deploy, deploy: true };
     }
     
@@ -159,7 +165,7 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
         setTimeout(() => {
           setIsOpen(false);
           onTriggerTerminalCommand && onTriggerTerminalCommand('sudo deploy');
-        }, 1800);
+        }, 1200);
       }
 
       const botMsgId = Date.now() + 1;
@@ -186,8 +192,8 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
         } else {
           clearInterval(typingIntervalRef.current);
         }
-      }, 35);
-    }, 800);
+      }, 30);
+    }, 500);
   };
 
   useEffect(() => {
@@ -202,52 +208,70 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
 
   return (
     <>
+      {/* INTERACTIVE EYE-TRACKING ROBOT FLOATING BUTTON */}
       <button 
         id="robot-assistant-btn"
         ref={floatingBtnRef}
         onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle AI Assistant"
         style={{
           ...styles.floatingBtn,
-          boxShadow: isOpen ? 'none' : 'var(--glow-magenta)',
+          boxShadow: isOpen ? 'none' : '0 0 15px rgba(255, 255, 255, 0.2)',
           transform: isOpen ? 'scale(0.9) rotate(90deg)' : 'scale(1)'
         }}
       >
         {isOpen ? (
-          <X size={22} />
+          <X size={24} style={{ color: '#ffffff' }} />
         ) : (
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style={{ transition: 'transform 0.2s' }}>
-            <circle cx="18" cy="18" r="13" fill="var(--bg-panel-dark)" stroke="var(--color-glass-border)" strokeWidth="1.5" />
-            <rect x="9" y="12" width="18" height="8" rx="4" fill="#080808" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-            <circle cx={14 + eyeOffset.x} cy={16 + eyeOffset.y} r="2" fill="var(--color-ai-magenta)" style={{ filter: 'drop-shadow(var(--glow-magenta))' }} />
-            <circle cx={22 + eyeOffset.x} cy={16 + eyeOffset.y} r="2" fill="var(--color-ai-magenta)" style={{ filter: 'drop-shadow(var(--glow-magenta))' }} />
-            <rect x="14" y="23" width="8" height="1.5" rx="0.75" fill="var(--color-cloud-cyan)" />
-            <line x1="18" y1="5" x2="18" y2="8" stroke="var(--color-glass-border)" strokeWidth="1.5" />
-            <circle cx="18" cy="4" r="1.5" fill="var(--color-ai-magenta)" />
+          <svg width="38" height="38" viewBox="0 0 36 36" fill="none" style={{ transition: 'transform 0.2s' }}>
+            <circle cx="18" cy="18" r="13" fill="#0c0e17" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.5" />
+            <rect x="9" y="12" width="18" height="8" rx="4" fill="#04050a" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1" />
+            <circle cx={14 + eyeOffset.x} cy={16 + eyeOffset.y} r="2" fill="#ffffff" style={{ filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))' }} />
+            <circle cx={22 + eyeOffset.x} cy={16 + eyeOffset.y} r="2" fill="#ffffff" style={{ filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))' }} />
+            <rect x="14" y="23" width="8" height="1.5" rx="0.75" fill="#ffffff" />
+            <line x1="18" y1="5" x2="18" y2="8" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" />
+            <circle cx="18" cy="4" r="1.5" fill="#ffffff" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.8))' }} />
           </svg>
         )}
-        {!isOpen && <span style={styles.notificationDot} />}
       </button>
 
+      {/* SLEEK CYBER-GLASS CHAT PANEL */}
       {isOpen && (
         <div ref={panelRef} className="glass-panel ai-assistant-panel" style={styles.chatPanel}>
+          {/* HEADER */}
           <div style={styles.panelHeader}>
             <div style={styles.headerInfo}>
               <div style={styles.avatar}>
-                <Bot size={18} style={{ color: 'var(--color-ai-magenta)' }} />
+                <Bot size={18} style={{ color: 'var(--color-cloud-cyan)' }} />
               </div>
               <div style={styles.nameContainer}>
-                <span style={styles.agentName}>AURA AI Assistant</span>
+                <span style={styles.agentName}>MADESH.IN AI COPILOT</span>
                 <div style={styles.statusGroup}>
-                  <span className="status-dot" />
-                  <span style={styles.agentStatus}>Online & Ready</span>
+                  <span className="status-dot" style={{ backgroundColor: '#27c93f', boxShadow: '0 0 10px #27c93f' }} />
+                  <span style={styles.agentStatus}>DevOps Assistant • Online</span>
                 </div>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} style={styles.closeBtn}>
-              <X size={18} />
-            </button>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button 
+                onClick={() => {
+                  setIsOpen(false);
+                  onTriggerTerminalCommand && onTriggerTerminalCommand('help');
+                }}
+                className="nav-link-btn"
+                style={styles.headerActionBtn}
+                title="Launch CLI Terminal"
+              >
+                <Terminal size={14} />
+              </button>
+              <button onClick={() => setIsOpen(false)} style={styles.closeBtn} title="Close Assistant">
+                <X size={16} />
+              </button>
+            </div>
           </div>
 
+          {/* MESSAGES LIST */}
           <div style={styles.messageBox}>
             {messages.map((msg) => (
               <div 
@@ -259,16 +283,16 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
                 }}
               >
                 {msg.sender === 'bot' && (
-                  <div style={{...styles.msgAvatar, backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--color-glass-border)'}}>
-                    <Bot size={11} style={{ color: 'var(--color-ai-magenta)' }} />
+                  <div style={styles.botAvatar}>
+                    <Bot size={12} style={{ color: 'var(--color-cloud-cyan)' }} />
                   </div>
                 )}
                 
                 <div 
                   style={{
                     ...styles.msgBubble,
-                    backgroundColor: msg.sender === 'user' ? 'rgba(0, 240, 255, 0.08)' : 'rgba(255, 255, 255, 0.03)',
-                    borderColor: msg.sender === 'user' ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.06)'
+                    backgroundColor: msg.sender === 'user' ? 'rgba(0, 240, 255, 0.12)' : 'rgba(255, 255, 255, 0.04)',
+                    borderColor: msg.sender === 'user' ? 'rgba(0, 240, 255, 0.25)' : 'rgba(255, 255, 255, 0.08)'
                   }}
                 >
                   <p style={styles.msgText}>{msg.text}</p>
@@ -276,23 +300,23 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
                 </div>
 
                 {msg.sender === 'user' && (
-                  <div style={{...styles.msgAvatar, backgroundColor: 'rgba(0, 240, 255, 0.08)', border: '1px solid rgba(0, 240, 255, 0.15)'}}>
-                    <User size={11} style={{ color: 'var(--color-cloud-cyan)' }} />
+                  <div style={styles.userAvatar}>
+                    <User size={12} style={{ color: '#ffffff' }} />
                   </div>
                 )}
               </div>
             ))}
 
             {isTyping && (
-              <div style={{...styles.messageRow, justifyContent: 'flex-start', alignSelf: 'flex-start'}}>
-                <div style={{...styles.msgAvatar, backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--color-glass-border)'}}>
-                  <Bot size={11} style={{ color: 'var(--color-ai-magenta)' }} />
+              <div style={{ ...styles.messageRow, justifyContent: 'flex-start', alignSelf: 'flex-start' }}>
+                <div style={styles.botAvatar}>
+                  <Bot size={12} style={{ color: 'var(--color-cloud-cyan)' }} />
                 </div>
-                <div style={{...styles.msgBubble, backgroundColor: 'rgba(255, 255, 255, 0.03)', borderColor: 'rgba(255,255,255,0.06)'}}>
+                <div style={{ ...styles.msgBubble, backgroundColor: 'rgba(255, 255, 255, 0.04)', borderColor: 'rgba(255, 255, 255, 0.08)' }}>
                   <div style={styles.typingDots}>
                     <span style={styles.dot} />
-                    <span style={{...styles.dot, animationDelay: '0.15s'}} />
-                    <span style={{...styles.dot, animationDelay: '0.3s'}} />
+                    <span style={{ ...styles.dot, animationDelay: '0.15s' }} />
+                    <span style={{ ...styles.dot, animationDelay: '0.3s' }} />
                   </div>
                 </div>
               </div>
@@ -301,35 +325,65 @@ export default function AIAssistant({ onTriggerTerminalCommand, onFilterProjects
             <div ref={chatEndRef} />
           </div>
 
-          <div style={styles.quickActions}>
-            <button onClick={() => handleSendMessage("Tell me about Madesh's background")} style={styles.actionBtn}>
-              <Sparkles size={11} /> About Madesh
+          {/* QUICK ACTION CAROUSEL WITH SMOOTH SCROLL ARROWS */}
+          <div style={styles.carouselContainer}>
+            <button 
+              onClick={() => scrollChips('left')} 
+              style={styles.arrowBtn}
+              className="ai-arrow-btn"
+              title="Scroll Left"
+            >
+              <ChevronLeft size={14} />
             </button>
-            <button onClick={() => handleSendMessage("What deep learning projects does he have?")} style={styles.actionBtn}>
-              <Sparkles size={11} /> Projects
-            </button>
-            <button onClick={() => handleSendMessage("Tell me about Madesh's PyTorch experience")} style={styles.actionBtn}>
-              <Sparkles size={11} /> PyTorch Deep Learning
-            </button>
-            <button onClick={() => handleSendMessage("What certifications does Madesh hold?")} style={styles.actionBtn}>
-              <Sparkles size={11} /> Certifications
-            </button>
-            <button onClick={() => handleSendMessage("Simulate system deployment")} style={{...styles.actionBtn, borderColor: 'var(--color-ai-magenta)', color: 'var(--color-ai-magenta)'}}>
-              <Zap size={11} /> Deploy System
+
+            <div ref={chipsScrollRef} style={styles.quickActions} className="ai-chips-scroll">
+              <button onClick={() => handleSendMessage("About Madesh")} style={styles.actionBtn} className="ai-chip-btn">
+                <User size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> About
+              </button>
+              <button onClick={() => handleSendMessage("Tell me about Madesh's DevOps & Cloud stack")} style={styles.actionBtn} className="ai-chip-btn">
+                <Cpu size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> Tech Stack
+              </button>
+              <button onClick={() => handleSendMessage("What projects has Madesh built?")} style={styles.actionBtn} className="ai-chip-btn">
+                <Code2 size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> Projects
+              </button>
+              <button onClick={() => handleSendMessage("What certifications does Madesh hold?")} style={styles.actionBtn} className="ai-chip-btn">
+                <ShieldCheck size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> Certifications
+              </button>
+              <button onClick={() => handleSendMessage("How can I contact Madesh?")} style={styles.actionBtn} className="ai-chip-btn">
+                <Sparkles size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> Contact
+              </button>
+              <button 
+                onClick={() => handleSendMessage("Simulate system deployment")} 
+                style={{ ...styles.actionBtn, borderColor: 'rgba(0, 240, 255, 0.3)', color: 'var(--color-cloud-cyan)', backgroundColor: 'rgba(0, 240, 255, 0.08)' }}
+                className="ai-chip-btn"
+              >
+                <Zap size={12} style={{ color: 'var(--color-cloud-cyan)' }} /> Deploy System
+              </button>
+            </div>
+
+            <button 
+              onClick={() => scrollChips('right')} 
+              style={styles.arrowBtn}
+              className="ai-arrow-btn"
+              title="Scroll Right"
+            >
+              <ChevronRight size={14} />
             </button>
           </div>
 
+          {/* INPUT FOOTER */}
           <div style={styles.inputFooter}>
             <input 
               type="text"
-              placeholder="Ask AURA a question..."
+              placeholder="Ask about DevOps, projects, skills..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               style={styles.textInput}
+              className="ai-chat-input"
             />
-            <button onClick={() => handleSendMessage()} style={styles.sendBtn}>
-              <Send size={14} />
+            <button onClick={() => handleSendMessage()} style={styles.sendBtn} className="ai-send-btn" title="Send Message">
+              <Send size={15} />
             </button>
           </div>
         </div>
@@ -347,8 +401,8 @@ const styles = {
     height: '56px',
     borderRadius: '50%',
     backgroundColor: 'var(--bg-panel-dark)',
-    border: '1px solid var(--color-glass-border)',
-    color: 'var(--text-bright)',
+    border: '1px solid rgba(255, 255, 255, 0.25)',
+    color: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -356,29 +410,18 @@ const styles = {
     zIndex: 9999,
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   },
-  notificationDot: {
-    position: 'absolute',
-    top: '3px',
-    right: '3px',
-    width: '12px',
-    height: '12px',
-    borderRadius: '50%',
-    backgroundColor: 'var(--color-ai-magenta)',
-    border: '2px solid var(--bg-panel-dark)',
-    boxShadow: 'var(--glow-magenta)',
-  },
   chatPanel: {
     position: 'fixed',
     bottom: '96px',
     right: '24px',
-    width: '360px',
-    height: '480px',
-    borderRadius: '16px',
-    border: '1px solid var(--color-glass-border)',
-    backgroundColor: 'rgba(10, 8, 25, 0.85)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
-    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.7), var(--glow-magenta)',
+    width: '395px',
+    height: '520px',
+    borderRadius: '20px',
+    border: '1px solid rgba(255, 255, 255, 0.12)',
+    backgroundColor: 'rgba(6, 7, 16, 0.95)',
+    backdropFilter: 'blur(24px)',
+    WebkitBackdropFilter: 'blur(24px)',
+    boxShadow: '0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.15)',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
@@ -388,36 +431,37 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '14px 16px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-    backgroundColor: 'rgba(7, 5, 20, 0.85)',
+    padding: '14px 18px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(4, 5, 12, 0.95)',
   },
   headerInfo: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
+    gap: '12px',
   },
   avatar: {
-    width: '32px',
-    height: '32px',
-    borderRadius: '50%',
-    backgroundColor: 'rgba(254, 1, 154, 0.1)',
+    width: '36px',
+    height: '36px',
+    borderRadius: '10px',
+    backgroundColor: 'rgba(0, 240, 255, 0.08)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    border: '1px solid rgba(254, 1, 154, 0.2)',
+    border: '1px solid rgba(0, 240, 255, 0.25)',
+    boxShadow: '0 0 12px rgba(0, 240, 255, 0.15)',
   },
   nameContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '2px',
+    gap: '3px',
   },
   agentName: {
     fontSize: '0.85rem',
     fontFamily: 'var(--font-display)',
-    fontWeight: '700',
+    fontWeight: '800',
     color: 'var(--text-bright)',
-    letterSpacing: '0.02em',
+    letterSpacing: '0.06em',
   },
   statusGroup: {
     display: 'flex',
@@ -425,17 +469,33 @@ const styles = {
     gap: '6px',
   },
   agentStatus: {
-    fontSize: '0.65rem',
+    fontSize: '0.62rem',
     fontFamily: 'var(--font-mono)',
-    color: '#27c93f',
-    letterSpacing: '0.02em',
+    color: 'var(--text-muted)',
+    letterSpacing: '0.03em',
+  },
+  headerActionBtn: {
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    color: 'var(--color-cloud-cyan)',
+    borderRadius: '8px',
+    width: '30px',
+    height: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
   },
   closeBtn: {
     background: 'none',
     border: 'none',
-    color: 'var(--text-dark)',
+    color: 'var(--text-muted)',
     cursor: 'pointer',
     padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     transition: 'color 0.2s',
   },
   messageBox: {
@@ -449,13 +509,27 @@ const styles = {
   messageRow: {
     display: 'flex',
     gap: '8px',
-    maxWidth: '85%',
+    maxWidth: '88%',
     alignItems: 'flex-start',
   },
-  msgAvatar: {
-    width: '22px',
-    height: '22px',
-    borderRadius: '50%',
+  botAvatar: {
+    width: '26px',
+    height: '26px',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(0, 240, 255, 0.08)',
+    border: '1px solid rgba(0, 240, 255, 0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '2px',
+    flexShrink: 0,
+  },
+  userAvatar: {
+    width: '26px',
+    height: '26px',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -466,20 +540,21 @@ const styles = {
     padding: '10px 14px',
     borderRadius: '14px',
     border: '1px solid var(--color-glass-border)',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)',
   },
   msgText: {
-    fontSize: '0.82rem',
+    fontSize: '0.83rem',
     color: 'var(--text-bright)',
-    lineHeight: 1.45,
+    lineHeight: 1.5,
     whiteSpace: 'pre-line',
   },
   msgTime: {
-    fontSize: '0.62rem',
+    fontSize: '0.6rem',
     color: 'var(--text-dark)',
     display: 'block',
     marginTop: '4px',
     textAlign: 'right',
+    fontFamily: 'var(--font-mono)',
   },
   typingDots: {
     display: 'flex',
@@ -492,61 +567,92 @@ const styles = {
     width: '5px',
     height: '5px',
     borderRadius: '50%',
-    backgroundColor: 'var(--color-ai-magenta)',
-    opacity: 0.6,
+    backgroundColor: 'var(--color-cloud-cyan)',
+    opacity: 0.7,
     animation: 'float 1s ease-in-out infinite alternate',
   },
-  quickActions: {
+  carouselContainer: {
     display: 'flex',
-    gap: '6px',
-    padding: '10px 16px',
-    overflowX: 'auto',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    borderTop: '1px solid rgba(255,255,255,0.03)',
-    scrollbarWidth: 'none',
-  },
-  actionBtn: {
-    display: 'inline-flex',
     alignItems: 'center',
-    gap: '4px',
-    padding: '6px 12px',
-    borderRadius: '12px',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
-    color: 'var(--text-muted)',
-    fontSize: '0.72rem',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    transition: 'all 0.2s',
+    padding: '8px 10px',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+    gap: '6px',
   },
-  inputFooter: {
-    display: 'flex',
-    padding: '12px 16px',
-    gap: '8px',
-    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-    backgroundColor: 'rgba(7, 5, 20, 0.85)',
-  },
-  textInput: {
-    flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: '20px',
-    padding: '8px 16px',
-    fontSize: '0.82rem',
-    color: 'var(--text-bright)',
-    outline: 'none',
-  },
-  sendBtn: {
-    width: '36px',
-    height: '36px',
+  arrowBtn: {
+    width: '26px',
+    height: '26px',
     borderRadius: '50%',
-    backgroundColor: 'var(--color-cyber-purple)',
-    border: 'none',
-    color: 'var(--text-pure)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    color: 'var(--color-cloud-cyan)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    transition: 'background-color 0.2s',
+    flexShrink: 0,
+    transition: 'all 0.2s ease',
+  },
+  quickActions: {
+    flex: 1,
+    display: 'flex',
+    flexWrap: 'nowrap',
+    gap: '8px',
+    overflowX: 'auto',
+    overflowY: 'hidden',
+    scrollBehavior: 'smooth',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    WebkitOverflowScrolling: 'touch',
+  },
+  actionBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '6px 13px',
+    borderRadius: '18px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    color: 'var(--text-bright)',
+    fontSize: '0.73rem',
+    fontFamily: 'var(--font-mono)',
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    flexShrink: 0,
+    transition: 'all 0.2s cubic-bezier(0.25, 1, 0.5, 1)',
+  },
+  inputFooter: {
+    display: 'flex',
+    padding: '12px 16px',
+    gap: '10px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(4, 5, 12, 0.95)',
+    alignItems: 'center',
+  },
+  textInput: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    border: '1px solid rgba(255, 255, 255, 0.12)',
+    borderRadius: '24px',
+    padding: '9px 16px',
+    fontSize: '0.83rem',
+    color: 'var(--text-bright)',
+    outline: 'none',
+    fontFamily: 'var(--font-sans)',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  },
+  sendBtn: {
+    width: '38px',
+    height: '38px',
+    borderRadius: '50%',
+    backgroundColor: 'var(--color-cloud-cyan)',
+    border: 'none',
+    color: '#000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 0 15px rgba(0, 240, 255, 0.4)',
+    transition: 'transform 0.2s, background-color 0.2s',
   }
 };

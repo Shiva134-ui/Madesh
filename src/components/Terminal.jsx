@@ -77,8 +77,8 @@ export default function Terminal({ isOpen, onClose, triggerCommand }) {
         break;
       case 'about':
         newHistory.push(
-          { text: '--- ABOUT MADESH S. NADAR ---', type: 'system' },
-          { text: '  Name:     Madesh S. Nadar', type: 'info' },
+          { text: '--- ABOUT MADESH S ---', type: 'system' },
+          { text: '  Name:     Madesh S', type: 'info' },
           { text: '  Role:     Aspiring DevOps Engineer | CSE Student', type: 'info' },
           { text: '  College:  SCAD College of Engineering & Technology', type: 'info' },
           { text: '  CGPA:     7.5 | Batch: 2023–2027', type: 'info' },

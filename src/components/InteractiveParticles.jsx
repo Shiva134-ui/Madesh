@@ -39,8 +39,8 @@ export default function InteractiveParticles({ theme }) {
     const updateThemeColors = () => {
       if (theme === 'cyberpunk') {
         themeColors.primary = '#00F0FF';
-        themeColors.accent = '#FF0055';
-        themeColors.purple = '#7000FF';
+        themeColors.accent = '#ffffff';
+        themeColors.purple = '#00F0FF';
         themeColors.isDark = true;
       } else if (theme === 'emerald') {
         themeColors.primary = '#bfbfbf';
@@ -370,7 +370,7 @@ export default function InteractiveParticles({ theme }) {
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(mouse.current.x, mouse.current.y);
             ctx.globalAlpha = alpha;
-            ctx.strokeStyle = themeColors.accent; // use secondary accent magenta for cursor draw
+            ctx.strokeStyle = '#ffffff'; // pure white for cursor connection web
             ctx.lineWidth = 0.85;
             ctx.stroke();
             ctx.lineWidth = 0.65; // restore
@@ -411,7 +411,7 @@ export default function InteractiveParticles({ theme }) {
         width: '100%',
         height: '100%',
         zIndex: 1,
-        pointerEvents: 'auto',
+        pointerEvents: 'none',
         overflow: 'hidden'
       }}
     >
@@ -421,7 +421,7 @@ export default function InteractiveParticles({ theme }) {
           display: 'block',
           width: '100%',
           height: '100%',
-          cursor: 'crosshair',
+          pointerEvents: 'none',
         }}
       />
     </div>

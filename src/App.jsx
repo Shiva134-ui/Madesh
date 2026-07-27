@@ -235,9 +235,26 @@ export default function App() {
 
   const scrollToSection = (id) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+    } else {
+      const element = document.getElementById(id);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  const NAV_ITEMS = [
+    { id: 'architecture', label: 'ARCHITECTURE' },
+    { id: 'skills', label: 'SKILLS' },
+    { id: 'projects', label: 'PROJECTS' },
+    { id: 'experience', label: 'EXPERIENCE' },
+    { id: 'certifications', label: 'CERTIFICATIONS' },
+    { id: 'contact', label: 'CONTACT' },
+  ];
 
   return (
     <div style={appStyles.appWrapper}>
@@ -255,30 +272,16 @@ export default function App() {
 
           {/* Desktop Nav */}
           <nav style={appStyles.desktopNav}>
-            {['architecture', 'skills', 'experience', 'contact'].map(sec => (
+            {NAV_ITEMS.map(item => (
               <button 
-                key={sec} 
-                onClick={() => handleInteractiveClick(() => scrollToSection(sec))} 
+                key={item.id} 
+                onClick={() => handleInteractiveClick(() => scrollToSection(item.id))} 
                 style={appStyles.navLink}
                 className="nav-link-btn"
               >
-                {sec.toUpperCase()}
+                {item.label}
               </button>
             ))}
-            <button
-              onClick={() => handleInteractiveClick(() => navigate('/projects'))}
-              style={appStyles.navLink}
-              className="nav-link-btn"
-            >
-              PROJECTS
-            </button>
-            <button
-              onClick={() => handleInteractiveClick(() => navigate('/certificates'))}
-              style={appStyles.navLink}
-              className="nav-link-btn"
-            >
-              CERTS
-            </button>
           </nav>
 
           {/* Nav Icons Right */}
@@ -328,27 +331,15 @@ export default function App() {
       {mobileMenuOpen && (
         <div ref={mobileMenuRef} style={appStyles.mobileMenu} className="glass-panel mobile-menu">
           <nav style={appStyles.mobileNavList}>
-            {['architecture', 'skills', 'experience', 'contact'].map(sec => (
+            {NAV_ITEMS.map(item => (
               <button 
-                key={sec} 
-                onClick={() => handleInteractiveClick(() => scrollToSection(sec))} 
+                key={item.id} 
+                onClick={() => handleInteractiveClick(() => scrollToSection(item.id))} 
                 style={appStyles.mobileNavLink}
               >
-                {sec.toUpperCase()}
+                {item.label}
               </button>
             ))}
-            <button
-              onClick={() => handleInteractiveClick(() => navigate('/projects'))}
-              style={appStyles.mobileNavLink}
-            >
-              PROJECTS
-            </button>
-            <button
-              onClick={() => handleInteractiveClick(() => navigate('/certificates'))}
-              style={appStyles.mobileNavLink}
-            >
-              CERTIFICATES
-            </button>
           </nav>
         </div>
       )}
@@ -406,7 +397,7 @@ export default function App() {
             <Hero 
               soundEnabled={soundEnabled}
               theme={theme}
-              onExploreProjects={() => scrollToSection('architecture')}
+              onExploreProjects={() => scrollToSection('projects')}
               onContactClick={() => scrollToSection('contact')}
             />
             <GitHubStats />
@@ -450,7 +441,7 @@ export default function App() {
       {/* SECURE FOOTER */}
       <footer style={appStyles.footer}>
         <div className="container" style={appStyles.footerContainer}>
-          <span style={appStyles.copyText}>© 2026 MADESH S. NADAR. ALL RIGHTS RESERVED.</span>
+          <span style={appStyles.copyText}>© 2026 MADESH S. ALL RIGHTS RESERVED.</span>
           <div style={appStyles.madeWith}>
             <span>MADE WITH</span>
             <Heart size={12} style={{ color: 'var(--color-ai-magenta)', filter: 'drop-shadow(var(--glow-magenta))' }} />
