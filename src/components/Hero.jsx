@@ -296,7 +296,7 @@ export default function Hero({ onExploreProjects, onContactClick, soundEnabled, 
             </svg>
 
             {/* Info Cards */}
-            <div style={heroStyles.metricRow}>
+            <div style={heroStyles.metricRow} className="hero-metric-row">
               {[
                 { label: 'PURSUING', value: 'B.E.',  sub: 'CSE 2023–2027' },
                 { label: 'CGPA',     value: '7.5',   sub: 'Current Score'  },
